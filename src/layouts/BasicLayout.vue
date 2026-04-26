@@ -22,7 +22,6 @@ import GlobalHeader from '@/components/GlobalHeader.vue'
 #basiclayout {
 }
 #basiclayout .header {
-  background-color: red;
   margin-bottom: 16px;
 }
 #basiclayout .content {
