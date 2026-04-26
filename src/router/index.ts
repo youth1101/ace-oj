@@ -15,7 +15,6 @@ router.beforeEach((to, from, next) => {
 
   // 判断是否需要管理员权限
   if (to.meta?.access === 'canAdmin') {
-    // 如果用户不是 admin → 跳转到无权限页面
     if (userStore.loginUser?.role !== 'admin') {
       next('/noAuth')
       return

@@ -1,5 +1,5 @@
 <template>
-  <a-row id="globalHeader" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu mode="horizontal" :selected-keys="selectedKeys" @menu-item-click="doMenuClick">
         <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
@@ -8,6 +8,7 @@
             <div class="title">OnlieJudge</div>
           </div>
         </a-menu-item>
+        <!-- 动态生成导航栏菜单 -->
         <a-menu-item v-for="item in routes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
