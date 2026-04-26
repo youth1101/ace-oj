@@ -8,49 +8,57 @@
             <div class="title">OnlieJudge</div>
           </div>
         </a-menu-item>
-        <!-- 动态生成导航栏菜单 -->
+        <!-- 动态生成导航菜单 -->
         <a-menu-item v-for="item in routes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
     </a-col>
+    <!-- 用户信息区域 -->
     <a-col flex="100px">
       <div>{{ store.loginUser?.userName ?? '未登录' }}</div>
     </a-col>
   </a-row>
 </template>
+
 <script setup lang="ts">
+// 导入依赖
 import { routes } from '../router/routes'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 
+// 初始化
 const router = useRouter()
 const store = useUserStore()
-// 默认的主页
-const selectedKeys = ref(['/'])
+const selectedKeys = ref(['/']) // 默认选中首页
 
-// 路由跳转时，更新选中菜单项（让顶部菜单的高亮状态，自动跟随页面路由变化）
-router.afterEach((to, from, failure) => {
+// 路由跳转后更新菜单选中状态
+router.afterEach((to) => {
   selectedKeys.value = [to.path]
 })
 
+// 菜单点击处理
 const doMenuClick = (key: string) => {
   router.push({ path: key })
 }
 
+// 模拟用户登录
 setTimeout(() => {
   store.updateUser({ userName: '鱼皮', role: 'admin' })
 }, 3000)
 </script>
+
 <style scoped>
 .title-bar {
   display: flex;
   align-items: center;
 }
+
 .title {
   color: #444;
 }
+
 .logo {
   height: 48px;
 }
