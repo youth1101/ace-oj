@@ -5,7 +5,7 @@
         <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
-        <route-view />
+        <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://github.com/youth1101/ace-oj" target="_blank"> 项目源码地址 </a>

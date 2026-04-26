@@ -39,7 +39,7 @@ const doMenuClick = (key: string) => {
 }
 
 setTimeout(() => {
-  store.updateUser({ userName: '鱼皮' })
+  store.updateUser({ userName: '鱼皮', role: 'admin' })
 }, 3000)
 </script>
 <style scoped>

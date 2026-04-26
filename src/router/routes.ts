@@ -19,9 +19,6 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/noAuth',
     name: '无法访问',
     component: NoAuthView,
-    meta: {
-      access: 'canAdmin',
-    },
   },
   {
     path: '/about',
