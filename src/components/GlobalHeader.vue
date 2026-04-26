@@ -14,17 +14,18 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>鱼皮</div>
+      <div>{{ store.loginUser?.userName ?? '未登录' }}</div>
     </a-col>
   </a-row>
 </template>
 <script setup lang="ts">
 import { routes } from '../router/routes'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 
 const router = useRouter()
-
+const store = useUserStore()
 // 默认的主页
 const selectedKeys = ref(['/'])
 
@@ -36,6 +37,10 @@ router.afterEach((to, from, failure) => {
 const doMenuClick = (key: string) => {
   router.push({ path: key })
 }
+
+setTimeout(() => {
+  store.updateUser({ userName: '鱼皮' })
+}, 3000)
 </script>
 <style scoped>
 .title-bar {
