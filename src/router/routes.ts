@@ -22,6 +22,11 @@ export const routes: Array<RouteRecordRaw> = [
     component: NoAuthView, // 无权限页面
   },
   {
+    path: '/hide',
+    name: '显隐页面',
+    meta: { hideInMenu: true }, // 该页面在菜单中隐藏
+  },
+  {
     path: '/about',
     name: '关于我的',
     // 关于页面（待实现，计划使用懒加载）

@@ -9,7 +9,7 @@
           </div>
         </a-menu-item>
         <!-- 动态生成导航菜单 -->
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -31,10 +31,20 @@ import { ref } from 'vue'
 // 初始化
 const router = useRouter()
 const store = useUserStore()
-const selectedKeys = ref(['/']) // 默认选中首页
+
+// 过滤路由，只展示需要展示的路由
+const visibleRoutes = routes.filter((item, index) => {
+  if (item.meta?.hideInMenu) {
+    return false
+  }
+  return true
+})
+
+// 默认选中首页
+const selectedKeys = ref(['/'])
 
 // 路由跳转后更新菜单选中状态
-router.afterEach((to) => {
+router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path]
 })
 
