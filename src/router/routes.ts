@@ -1,4 +1,5 @@
 // 导入路由组件
+import ACCESS_ENUM from '@/access/accessEnum'
 import AdminView from '@/views/AdminView.vue'
 import NoAuthView from '@/views/NoAuthView.vue'
 import type { RouteRecordRaw } from 'vue-router'
@@ -14,7 +15,7 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: '管理员可见',
     component: AdminView,
-    meta: { access: 'canAdmin' }, // 需要管理员权限
+    meta: { access: ACCESS_ENUM.ADMIN }, // 需要管理员权限
   },
   {
     path: '/noAuth',

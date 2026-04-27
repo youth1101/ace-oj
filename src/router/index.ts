@@ -10,19 +10,19 @@ const router = createRouter({
   routes: routes as RouteRecordRaw[],
 })
 
-// 全局路由守卫
-router.beforeEach((to, from, next) => {
-  const userStore = useUserStore()
-  
-  // 权限检查：需要管理员权限的路由
-  if (to.meta?.access === 'canAdmin') {
-    if (userStore.loginUser?.role !== 'admin') {
-      next('/noAuth')
-      return
-    }
-  }
-  
-  next() // 放行
-})
+// // 全局路由守卫
+// router.beforeEach((to, from, next) => {
+//   const userStore = useUserStore()
+
+//   // 权限检查：需要管理员权限的路由
+//   if (to.meta?.access === 'canAdmin') {
+//     if (userStore.loginUser?.userRole !== 'admin') {
+//       next('/noAuth')
+//       return
+//     }
+//   }
+
+//   next() // 放行
+// })
 
 export default router

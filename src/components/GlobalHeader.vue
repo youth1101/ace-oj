@@ -23,23 +23,29 @@
 
 <script setup lang="ts">
 // 导入依赖
+import { computed, ref } from 'vue'
 import { routes } from '../router/routes'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
-import { ref } from 'vue'
+import checkAccess from '@/access/checkAccess'
+import ACCESS_ENUM from '@/access/accessEnum'
 
 // 初始化
 const router = useRouter()
 const store = useUserStore()
 
-// 过滤路由，只展示需要展示的路由
-const visibleRoutes = routes.filter((item, index) => {
-  if (item.meta?.hideInMenu) {
-    return false
-  }
-  return true
+// 展示在路由的数组，过滤路由，只展示需要展示的路由
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.hideInMenu) {
+      return false
+    }
+    if (!checkAccess(store.loginUser, item.meta?.access as string)) {
+      return false
+    }
+    return true
+  })
 })
-
 // 默认选中首页
 const selectedKeys = ref(['/'])
 
@@ -55,7 +61,7 @@ const doMenuClick = (key: string) => {
 
 // 模拟用户登录
 setTimeout(() => {
-  store.updateUser({ userName: '鱼皮', role: 'admin' })
+  store.updateUser({ userName: '鱼皮管理员', userRole: ACCESS_ENUM.ADMIN })
 }, 3000)
 </script>
 
